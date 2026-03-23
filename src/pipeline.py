@@ -102,6 +102,16 @@ class Pipeline:
             # Reset reconnect attempts on success
             reconnect_attempts = 0
             
+            # Check for stop command from dashboard
+            if os.path.exists("tracker_command.txt"):
+                with open("tracker_command.txt", "r") as f:
+                    if f.read().strip().lower() == "stop":
+                        print("STOP command received. Exiting pipeline...")
+                        self.logger.log_system("STOP command received from dashboard.")
+                        # Clear command
+                        with open("tracker_command.txt", "w") as f2: f2.write("idle")
+                        break
+            
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             self.frame_count += 1
             

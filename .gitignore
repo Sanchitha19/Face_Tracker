@@ -8,6 +8,9 @@ rtsp_test.log
 models/*.pt
 models/*.onnx
 
+tracker_command.txt
+uploaded_video.mp4
+
 # Python
 __pycache__/
 *.py[cod]

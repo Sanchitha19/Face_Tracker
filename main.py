@@ -5,6 +5,7 @@ Run: python main.py
 
 import sys
 import os
+import time
 
 # Add project root to sys.path for internal imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -44,26 +45,40 @@ def main():
         print(f"Error initializing logger: {e}")
         sys.exit(1)
 
-    system_logger.log_system("System started. Loading models...")
+    system_logger.log_system("System standby. Waiting for START command from dashboard...")
+    print("\n  [STANDBY] Waiting for START command from dashboard (app.py)...")
 
-    # Run pipeline
-    pipeline = Pipeline(cfg)
-    try:
-        pipeline.run()
-    except KeyboardInterrupt:
-        system_logger.log_system("Interrupted by user.")
-    except Exception as e:
-        system_logger.log_system(f"Fatal error: {e}")
-        # traceback would be good here but stick to requirement
-        raise
-    finally:
-        pipeline.cleanup()
-        unique = pipeline.get_visitor_count()
-        system_logger.log_system(
-            f"Session ended. Total unique visitors: {unique}"
-        )
-        print(f"\n  Total unique visitors this session: {unique}")
-        print("=" * 60)
+    while True:
+        # Check command file
+        if os.path.exists("tracker_command.txt"):
+            with open("tracker_command.txt", "r") as f:
+                cmd = f.read().strip().lower()
+            
+            if cmd == "start":
+                print("\n  [START] Initialization command received!")
+                system_logger.log_system("START command received. Launching pipeline.")
+                
+                # Clear command to avoid immediate restarts
+                with open("tracker_command.txt", "w") as f2: f2.write("idle")
+
+                # Reload config (in case it was changed in dashboard)
+                cfg = get_config()
+                
+                # Run pipeline
+                pipeline = Pipeline(cfg)
+                try:
+                    pipeline.run()
+                except Exception as e:
+                    system_logger.log_system(f"Pipeline error: {e}")
+                    print(f"Error: {e}")
+                finally:
+                    pipeline.cleanup()
+                    unique = pipeline.get_visitor_count()
+                    system_logger.log_system(f"Tracker stopped. Unique visitors: {unique}")
+                    print(f"\n  [STOP] Tracker stopped. Unique visitors: {unique}")
+                    print("  Status: STANDBY (Waiting for next START command...)")
+        
+        time.sleep(1) # Check every second
 
 
 if __name__ == "__main__":

@@ -1,38 +1,31 @@
 {
-  "video_source": "sample.mp4",
-  "use_rtsp": true,
-  "rtsp_url": "rtsp://admin:password@192.168.1.100:554/stream",
-
+  "video_source": "uploaded_video.mp4",
+  "use_rtsp": false,
+  "rtsp_url": "rtsp://username:password@ip:port/stream",
   "skip_frames": 3,
-
   "detection": {
     "yolo_model": "models/yolov8n-face.pt",
     "confidence_threshold": 0.5,
     "iou_threshold": 0.45
   },
-
   "recognition": {
-    "similarity_threshold": 0.30,
+    "similarity_threshold": 0.3,
     "embedding_model": "buffalo_l",
     "min_face_size": 40
   },
-
   "tracking": {
     "max_disappeared": 60,
     "iou_threshold": 0.3,
     "exit_confirm_frames": 180
   },
-
   "logging": {
     "log_file": "logs/events.log",
     "image_quality": 95,
     "save_exit_images": true
   },
-
   "database": {
     "path": "db/face_tracker.db"
   },
-
   "display": {
     "show_video": false,
     "draw_landmarks": false,
