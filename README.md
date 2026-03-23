@@ -7,9 +7,11 @@ track, and recognize faces in real-time using YOLOv8 + InsightFace + SQLite.
 
 ## Demo Video
 
-> **[Click here to watch the demo on YouTube / Loom](#)**
-> *(Replace this link with your actual Loom or YouTube URL before submitting)*
 
+> **Important:** A video walkthrough is required for submission review.
+
+🎬 **[Watch the Demo on Loom / YouTube](https://www.loom.com/share/e56df1a9ff0b49f89bcd602a9cb4782d?t=57)**
+    **continuation**🎬 **[Watch the Demo on Loom / YouTube](https://www.loom.com/share/a21211806af445d69c1ecbb67ca84187)**
 > ⚠️ A demo video is mandatory for submission review.
 
 ---
@@ -510,13 +512,6 @@ pip install numpy --only-binary=:all:
 
 ---
 
-## 📺 Demo Video
-
-> **Important:** A video walkthrough is required for submission review.
-
-🎬 **[Watch the Demo on Loom / YouTube](https://www.loom.com/share/e56df1a9ff0b49f89bcd602a9cb4782d?t=57)**
-    **continuation**🎬 **[Watch the Demo on Loom / YouTube](https://www.loom.com/share/a21211806af445d69c1ecbb67ca84187)**
-> *(Replace this link with your actual Loom or YouTube video URL before submitting)*
 
 
 > This project is a part of a hackathon run by https://katomaran.com
