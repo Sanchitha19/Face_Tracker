@@ -1,0 +1,22 @@
+# Logs and Data
+logs/
+db/*.db
+output.log
+rtsp_test.log
+
+# AI Models (ignore large weights)
+models/*.pt
+models/*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
